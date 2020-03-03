@@ -1,12 +1,12 @@
 import React, {Component} from 'react'; 
-
+ 
 import Header from './components/Header';
 import './styles.css';
-
+import  Main from './pages/main';
 const App = () => (
   <div className="App">
     <Header />
-    <h1>Hekki</h1>
+    <Main /> 
   </div>
 );
 
