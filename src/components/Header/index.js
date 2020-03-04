@@ -1,14 +1,14 @@
 import React from 'react';
-import ball from './ball.png';
-import back from './background.JPG';
+import logo from './logo.png'; 
 
 import './styles.css';
 
 const Header = () => (
 	<header id="main-header">
-		<img src={ball} className="ball" />
-		FootStats
+		<img src={logo} className="logo" /> 
+		<div className="divisorHeader"></div>
 	</header>
+	
 );
 
 export default Header;

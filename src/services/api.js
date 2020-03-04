@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-	baseURL:'https://api-football-v1.p.rapidapi.com/v2' 
+	baseURL:'https://free-nba.p.rapidapi.com' 
 });
 
 export default api;
