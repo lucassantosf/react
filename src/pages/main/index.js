@@ -11,18 +11,46 @@ const config = {
 
 export default class Main extends Component{
 	state = {
-		games: []
+		games: [],
+		gameInfo: {},
+		page : 1,
 	};
 	componentDidMount(){
 		this.loadGames();
 	}
-	loadGames = async () => {
-		const response = await api.get('/games',config) ;
-		this.setState({ games : response.data.data });
-		console.log(response.data);
+
+	loadGames = async (page = 1) => {
+		const response = await api.get(`/games?page=${page}`,config);      
+
+		const { data, ...gameInfo } = response.data;
+
+		this.setState({ games : data, gameInfo , page });
 	};
-	render(){
-		const { games } = this.state;
+
+	prevPage = () => { 
+		const { page, gameInfo } = this.state;
+		 
+		if(page === 1) return;
+
+		const pageNumber = page - 1 ;
+
+		this.loadGames(pageNumber); 
+	}
+	
+	nextPage = () => {
+		const { page, gameInfo } = this.state;
+		 
+		if(page === gameInfo.meta.total_pages) return;
+
+		const pageNumber = page + 1 ;
+
+		this.loadGames(pageNumber);
+	};
+	
+	render(){ 
+
+		const { games , page, ...gameInfo} = this.state; 
+		 
 		return (
 			<div className="games-list">  
 				{games.map(game => (
@@ -36,6 +64,10 @@ export default class Main extends Component{
 						<div className="col-5 text-center mt-3">Season {game.season}, {game.home_team.city}</div>  
 					</article>
 				))}
+				<div className="actions">
+					<button disabled={page === 1} onClick={this.prevPage}>Anterior</button>
+					<button disabled={page === 199} onClick={this.nextPage}>Próximo</button>
+				</div>
 			</div>
 		);
 	}
