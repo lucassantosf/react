@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import api from '../../services/api';
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 const config = {
   headers: {
@@ -54,6 +55,7 @@ export default class Main extends Component{
 		return (
 			<div className="games-list">  
 				{games.map(game => (
+					<Link to={`/games/${game.id}`}>
 					<article className="row">    
 						<div className="col-4 text-right"><a href="#" key="game.id">{game.home_team.full_name}</a></div>
 						<div className="col-1 text-center">{game.home_team_score}</div>
@@ -63,6 +65,7 @@ export default class Main extends Component{
 						<div className="col-1 text-center"></div> 
 						<div className="col-5 text-center mt-3">Season {game.season}, {game.home_team.city}</div>  
 					</article>
+					</Link>
 				))}
 				<div className="actions">
 					<button disabled={page === 1} onClick={this.prevPage}>Anterior</button>
