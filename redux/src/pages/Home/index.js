@@ -1,99 +1,55 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { ProductList } from "./styles";
 import { MdAddShoppingCart } from "react-icons/md";
+import { formatPrice } from "../../util/format";
+import api from "../../services/api";
 
-export default function Home() {
-  return (
-    <ProductList>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
-          alt="Tênis"
-        ></img>
-        <strong>Tênis muito legal</strong>
-        <span>R$129.99</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
+class Home extends Component {
+  state = {
+    products: [],
+  };
+  async componentDidMount() {
+    const response = await api.get("products");
+    const data = response.data.map((product) => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
+    this.setState({ products: data });
+  }
 
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
-          alt="Tênis"
-        ></img>
-        <strong>Tênis muito legal</strong>
-        <span>R$129.99</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
+  handleAddProduct = (product) => {
+    const { dispatch } = this.props;
 
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
-          alt="Tênis"
-        ></img>
-        <strong>Tênis muito legal</strong>
-        <span>R$129.99</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
+    dispatch({
+      type: "ADD_TO_CART",
+      product,
+    });
+  };
 
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
-          alt="Tênis"
-        ></img>
-        <strong>Tênis muito legal</strong>
-        <span>R$129.99</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
-          alt="Tênis"
-        ></img>
-        <strong>Tênis muito legal</strong>
-        <span>R$129.99</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
-          alt="Tênis"
-        ></img>
-        <strong>Tênis muito legal</strong>
-        <span>R$129.99</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-          <span>Adicionar ao carrinho</span>
-        </button>
-      </li>
-    </ProductList>
-  );
+  render() {
+    const { products } = this.state;
+    return (
+      <ProductList>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
+            <button
+              type="button"
+              onClick={() => this.handleAddProduct(product)}
+            >
+              <div>
+                <MdAddShoppingCart size={16} color="#FFF" />3
+              </div>
+              <span>Adicionar ao carrinho</span>
+            </button>
+          </li>
+        ))}
+      </ProductList>
+    );
+  }
 }
+
+export default connect()(Home);

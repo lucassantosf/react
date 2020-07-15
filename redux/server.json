@@ -1,0 +1,65 @@
+{
+  "stock": [],
+  "products": [
+    {
+      "id": 1,
+      "title": "Tênis de caminhada 1",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 2,
+      "title": "Tênis de caminhada 2",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 3,
+      "title": "Tênis de caminhada 3",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 4,
+      "title": "Tênis de caminhada 4",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 5,
+      "title": "Tênis de caminhada 5",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 6,
+      "title": "Tênis de caminhada 6",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 7,
+      "title": "Tênis de caminhada 7",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 8,
+      "title": "Tênis de caminhada 8",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 9,
+      "title": "Tênis de caminhada 9",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    },
+    {
+      "id": 10,
+      "title": "Tênis de caminhada 10",
+      "price": 179.9,
+      "image": "https://static.netshoes.com.br/produtos/tenis-everlast-kromus-masculino/26/AXB-1745-026/AXB-1745-026_zoom2.jpg?ts=1567596394&ims=326x"
+    }
+  ]
+}
