@@ -1,6 +1,7 @@
 "use strict";
 
 const crypto = require("crypto");
+const moment = require("moment");
 const User = use("App/Models/User");
 const Mail = use("Mail");
 
@@ -33,6 +34,34 @@ class ForgotPasswordController {
       return response
         .status(err.status)
         .send({ error: { message: "Algo nao deu certo, este email existe?" } });
+    }
+  }
+
+  async update({ request, response }) {
+    try {
+      const { token, password } = request.all();
+
+      const user = await User.findByOrFail("token", token);
+
+      const tokenExperied = moment()
+        .subtract("2", "days")
+        .isAfter(user.token_created_at);
+
+      if (tokenExperied) {
+        return response
+          .status(401)
+          .send({ error: { message: "Token expirado" } });
+      }
+
+      user.token = null;
+      user.token_created_at = null;
+      user.password = password;
+
+      await user.save();
+    } catch (err) {
+      return response
+        .status(err.status)
+        .send({ error: { message: "Algo nao deu certo" } });
     }
   }
 }
