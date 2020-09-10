@@ -11,9 +11,23 @@ class TaskSchema extends Schema {
         .integer("project_id")
         .unsigned()
         .references("id")
-        .inTable("projects");
-      table.integer("user_id").unsigned().references("id").inTable("users");
-      table.integer("file_id").unsigned().references("id").inTable("files");
+        .inTable("projects")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+      table
+        .integer("user_id")
+        .unsigned()
+        .references("id")
+        .inTable("users")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+      table
+        .integer("file_id")
+        .unsigned()
+        .references("id")
+        .inTable("files")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       table.string("title").notNullable();
       table.string("description", 20);
       table.timestamps();
