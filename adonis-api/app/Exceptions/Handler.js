@@ -1,7 +1,7 @@
 "use strict";
 
 const Env = use("Env");
-const Youch = use("Env");
+const Youch = use("Youch");
 const BaseExceptionHandler = use("BaseExceptionHandler");
 
 /**
