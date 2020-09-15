@@ -16,7 +16,7 @@ class UserAddressSchema extends Schema {
         .onDelete("CASCADE");
       table.string("street").notNullable();
       table.integer("number").notNullable();
-      table.string("district").notNullable();
+      table.string("district");
       table.string("state").notNullable();
       table.timestamps();
     });
