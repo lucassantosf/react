@@ -19,9 +19,14 @@ Route.group(() => {
 
   Route.resource("projects", "ProjectController")
     .apiOnly()
+    .except(["index", "show"])
     .validator(new Map([[["projects.store"], ["Project"]]]));
 
   Route.resource("projects.tasks", "TaskController")
     .apiOnly()
     .validator(new Map([[["projects.tasks.store"], ["Task"]]]));
-}).middleware(["auth"]);
+
+  Route.resource("permissions", "PermissionController").apiOnly();
+
+  Route.resource("roles", "RoleController").apiOnly();
+}).middleware(["auth", "is:(administrator || moderator )"]);

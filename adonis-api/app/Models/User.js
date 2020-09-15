@@ -32,6 +32,13 @@ class User extends Model {
   tasks() {
     return this.hasMany("App/Models/Task");
   }
+
+  static get traits() {
+    return [
+      "@provider:Adonis/Acl/HasRole",
+      "@provider:Adonis/Acl/HasPermission",
+    ];
+  }
 }
 
 module.exports = User;
