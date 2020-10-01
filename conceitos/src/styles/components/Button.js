@@ -15,7 +15,7 @@ const sizes = {
   `,
 };
 
-const color = {
+const colors = {
   default: css`
     background: #7289da;
     &:hover {
@@ -50,7 +50,7 @@ const Button = styled.button.attrs({
   text-transform: uppercase;
   font-weight: 700;
 
-  ${(props) => size[props.size || "default"]};
+  ${(props) => sizes[props.size || "default"]};
   ${(props) => colors[props.color || "default"]}
 
   ${(props) =>
