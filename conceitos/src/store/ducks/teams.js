@@ -7,6 +7,8 @@ const { Types, Creators } = createActions({
   selectTeam: ["team"],
   openTeamModal: null,
   closeTeamModal: null,
+  createTeamRequest: ["name"],
+  createTeamSuccess: ["team"],
 });
 
 export const AuthTypes = Types;
@@ -27,10 +29,13 @@ export const selectTeam = (state, { team }) => {
 
 export const openModal = (state) => state.merge({ teamModalOpen: true });
 export const closeModal = (state) => state.merge({ teamModalOpen: false });
+export const createSucess = (state, team) =>
+  state.merge({ data: [...state.data, team] });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_TEAM_SUCCESS]: getSuccess,
   [Types.SELECT_TEAM]: selectTeam,
   [Types.OPEN_TEAM_MODAL]: openModal,
   [Types.CLOSE_TEAM_MODAL]: closeModal,
+  [Types.CREATE_TEAM_SUCESS]: createSucess,
 });
