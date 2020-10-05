@@ -1,45 +1,127 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import ProjectsActions from "../../store/ducks/projects";
+import MembersActions from "../../store/ducks/members";
+
+import Modal from "../../components/Modal";
 import Button from "../../styles/components/Button";
 import { Container, Project } from "./styles";
+import Members from "../Members";
 
-const Projects = ({ activeTeam }) => {
-  if (!activeTeam) return null;
+class Projects extends Component {
+  static propTypes = {
+    getProjectsRequest: PropTypes.func.isRequired,
+    openProjectModal: PropTypes.func.isRequired,
+    closeProjectModal: PropTypes.func.isRequired,
+    createProjectRequest: PropTypes.func.isRequired,
+    openMembersModal: PropTypes.func.isRequired,
+    activeTeam: PropTypes.shape({
+      name: PropTypes.string,
+    }).isRequired,
+    projects: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          title: PropTypes.string,
+        })
+      ),
+      projectModalOpen: PropTypes.bool,
+    }).isRequired,
+    members: PropTypes.shape({
+      membersModalOpen: PropTypes.bool,
+    }).isRequired,
+  };
 
-  return (
+  componentDidMount() {
+    const { getProjectsRequest, activeTeam } = this.props;
+
+    if (activeTeam) {
+      getProjectsRequest();
+    }
+  }
+
+  state = {
+    newProject: "",
+  };
+
+  handleInputChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleCreateProject = (e) => {
+    e.preventDefault();
+
+    const { createProjectRequest } = this.props;
+    const { newProject } = this.state;
+
+    createProjectRequest(newProject);
+  };
+
+  render() {
+    const {
+      activeTeam,
+      openProjectModal,
+      closeProjectModal,
+      projects,
+      openMembersModal,
+      members,
+    } = this.props;
+    const { newProject } = this.state;
+
+    if (!activeTeam) return null;
     <Container>
       <header>
         <h1>{activeTeam.name}</h1>
         <div>
-          <Button onClick={}>+ Novo</Button>
-          <Button onClick={}>Membros</Button>
+          <Button onClick={openProjectModal}>+ Novo</Button>
+          <Button onClick={openMembersModal}>Membros</Button>
         </div>
       </header>
 
-      <Project>
-        <p>Aplication</p>
-      </Project>
+      {projects.data.map((project) => (
+        <Project key={project.id}>
+          <p>{project.title}</p>
+        </Project>
+      ))}
 
-      <Project>
-        <p>Aplication</p>
-      </Project>
+      {projects.projectModalOpen && (
+        <Modal>
+          <h1>Criar projeto</h1>
+          <form onSubmit={this.handleCreateProject}>
+            <span>Nome</span>
+            <input
+              name="newProject"
+              value={newProject}
+              onChange={this.handleInputChange}
+            />
 
-      <Project>
-        <p>Aplication</p>
-      </Project>
-    </Container>
-  );
-};
+            <Button size="big" type="submit">
+              Salvar
+            </Button>
 
-Projects.propTypes = {
-  activeTeam: PropTypes.shape({
-    name: PropTypes.string,
-  }).isRequired,
-};
+            <Button onClick={closeProjectModal} size="small" color="gray">
+              Cancelar
+            </Button>
+          </form>
+        </Modal>
+      )}
+
+      {members.membersModalOpen && <Members />}
+    </Container>;
+  }
+}
+
 const mapStateToProps = (state) => ({
   activeTeam: state.teams.active,
+  members: state.members,
+  projects: state.projects,
 });
 
-export default connect(mapStateToProps)(Projects);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ ...ProjectsActions, ...MembersActions }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Projects);
