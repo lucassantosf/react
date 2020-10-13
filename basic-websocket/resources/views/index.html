@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello Adonis</title>
+</head>
+<body>
+  <div id="content">
+    <header>
+      <div id="status"></div>Status
+    </header>
+    <section>
+      <ul></ul>
+    </section>
+    <footer>
+      <textarea placeholder="Digite seu texto aqui"></textarea>
+    </footer>
+  </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+<script src="https://unpkg.com/@adonisjs/websocket-client"></script>
+
+<script>
+  let ws = adonis.Ws('ws://localhost:3333').connect()
+
+  const status = document.querySelector('div#status');
+
+  ws.on('open',()=>{
+    status.classList.add('online');
+  })
+
+  ws.on('error',()=>{
+    status.classList.remove('online');
+  })
+
+  ws.on('close',()=>{
+    status.classList.remove('online');
+  })
+
+  const url = new URLSearchParams(window.location.search)
+  const name = url.get('name')
+
+  const chat = ws.subscribe('chat')
+
+  const textarea = document.querySelector('textarea')
+  const messageBox = document.querySelector('ul')
+  const section = document.querySelector('section')
+
+  textarea.addEventListener('keypress',e=>{
+    if(e.code === 'Enter'){
+      e.preventDefault()
+      chat.emit('message',{text: textarea.value, name})
+      textarea.value = '';
+    }
+  })
+
+  chat.on('message',(data)=>{
+    const li = document.createElement('li')
+    li.innerHTML = `<b>${data.name}</b> ${data.text}`
+    messageBox.appendChild(li)
+    section.scrollTop = section.scrollHeight
+  })
+
+</script>
+
+</html>
