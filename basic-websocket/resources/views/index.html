@@ -58,7 +58,6 @@
   chat.on('message',(data)=>{
     const li = document.createElement('li')
     li.innerHTML = `<b>${data.name}</b> ${data.text}`
-    //li.innerHTML = `<b>${data.name}</b> ${data.text}`
     messageBox.appendChild(li)
     section.scrollTop = section.scrollHeight
   })
