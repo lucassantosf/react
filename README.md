@@ -18,4 +18,4 @@ After cloning the repository, simply browse to any of these folders, and run the
 
 - "npm install" or "yarn install" to install the dependencies for each project;
 
-- "npm run start" or "yarn start" to run
+- "npm run start" or "yarn start" to run the project
