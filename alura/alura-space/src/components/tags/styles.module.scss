@@ -1,0 +1,26 @@
+@import "../../styles/variaveis";
+
+.tags{
+    width: 65vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $cor-do-texto;
+    font-family: $fonte-normal;
+    font-size: 16px;
+
+    &__itens{
+        list-style: none;
+        display: flex;
+        padding: 0;
+        width: 45%;
+        justify-content: space-between;
+
+        li{
+            border-radius: 8px;
+            background-color: $tag-color;
+            padding: 6px 10px;
+            cursor: pointer;            
+        }
+    }
+}
