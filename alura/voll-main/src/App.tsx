@@ -4,6 +4,7 @@ import Header from './components/header';
 import Container from './components/container';
 import Title from './components/title';
 import Footer from './components/footer';
+import TableS from './components/table';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Container>
         <Title>Área Administrativa</Title>
+        <TableS />
       </Container>
       <Footer/>
     </>
