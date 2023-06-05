@@ -11,7 +11,9 @@ const BarraNavegacao = () => {
 
     const [modalLoginAberta,setModalLoginAberta] = useState(false);
     const [modalCadastroAberta,setModalCadastroAberta] = useState(false);
-    const [usuarioEstaLogado, setUsuarioEstaLogado] = useState(false)
+
+    const token = sessionStorage.getItem("token")
+    const [usuarioEstaLogado, setUsuarioEstaLogado] = useState<boolean>(token != null)
 
     const aoEfetuarLogin = () => {
         setUsuarioEstaLogado(true)
