@@ -6,6 +6,7 @@ import logo from './assets/logo.png'
 import usuario from './assets/usuario.svg'
 import './BarraNavegacao.css'
 import { useState } from "react"
+import { history } from "../../App";
 
 const BarraNavegacao = () => {
 
@@ -20,9 +21,23 @@ const BarraNavegacao = () => {
         setModalLoginAberta(false)
     }
 
+    const efetuarLogout = ()=>{
+        setUsuarioEstaLogado(false)
+        sessionStorage.removeItem('token')
+        history.push('/')
+    }
+
     const acoesQuandoLogado = (<>
         <li>
             <Link to="/minha-conta/pedidos">Minha Conta</Link> 
+        </li>
+        <li>
+            <BotaoNavegacao
+                texto="Logout"
+                textoAltSrc="Icone representando um usuário"
+                imagemSrc={usuario}
+                onClick={efetuarLogout}
+            />
         </li>
     </>)
 

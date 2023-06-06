@@ -4,7 +4,7 @@ import { useState } from "react"
 import imagemPrincipal from './assets/login.png'
 
 import './ModalLoginUsuario.css'
-import axios from "axios"
+import http from "../../http"
 
 interface PropsModalLoginUsuario {
     aberta: boolean
@@ -23,7 +23,7 @@ const ModalLoginUsuario = ({ aberta, aoFechar, aoEfetuarLogin} : PropsModalLogin
             email,
             senha,
         }
-        axios.post('http://localhost:8000/public/login',usuario)
+        http.post('public/login',usuario)
             .then((response)=>{
                 console.log(response)
                 sessionStorage.setItem('token',response.data.access_token)
