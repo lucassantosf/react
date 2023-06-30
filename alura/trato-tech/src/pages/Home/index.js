@@ -7,7 +7,17 @@ import { useSelector } from 'react-redux'
 
 export default function Home(){
     const navigate = useNavigate()
-    const categorias = useSelector((state)=>state.categorias)
+
+    const {categorias} = useSelector((state)=>{
+        const regexp = new RegExp(state.busca, 'i')
+
+        return {
+            categorias: state.categorias.filter(categoria =>
+                regexp.test(categoria.nome)
+            ),
+        }
+    })
+
     return (
         <div>
             <Header 
