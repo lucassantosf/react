@@ -1,3 +1,4 @@
+import Anuncie from "pages/Anuncie";
 import PaginaPadrao from "components/PaginaPadrao";
 import Carrinho from "pages/Carrinho";
 import Categoria from "pages/Categoria";
@@ -12,6 +13,7 @@ export default function Router(){
                     <Route index element={<Home/>} />
                     <Route path='/categoria/:nomeCategoria' element={<Categoria />} />
                     <Route path='carrinho' element={<Carrinho />} />
+                    <Route path='anuncie' element={<Anuncie />} />
                 </Route>
             </Routes>
         </BrowserRouter>
