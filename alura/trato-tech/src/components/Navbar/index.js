@@ -21,6 +21,9 @@ export default function Navbar(){
                 <div>
                     <Link to="/" className={classNames(styles.link,{[styles.selected]:location.pathname==='/'})}> Pagina Inicial</Link>
                 </div>
+                <div>
+                    <Link to="/anuncie" className={classNames(styles.link,{[styles.selected]:location.pathname==='/anuncie'})}> Anuncie</Link>
+                </div>
             </div>
             <div className={styles.busca}>
                 <Busca />
