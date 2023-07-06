@@ -4,14 +4,19 @@ import {
     AiFillHeart,
     AiFillMinusCircle,
     AiFillPlusCircle,
+    AiOutlineCheck,
+    AiFillEdit,
+    AiFillCloseCircle,
 } from 'react-icons/ai'
 import {
     FaCartPlus
 } from 'react-icons/fa'
-import { mudarFavorito } from 'store/reducers/itens'
+import { deletarItem, mudarFavorito, mudarItem } from 'store/reducers/itens'
 import { useDispatch, useSelector } from 'react-redux'
 import { mudarCarrinho, mudarQuantidade } from 'store/reducers/carrinho'
 import classNames from 'classnames'
+import { memo, useState } from 'react'
+import Input from 'components/Input'
 
 const iconeProps = {
     size: 24,
@@ -20,10 +25,10 @@ const iconeProps = {
 
 const quantidadeProps = {
     size: 32,
-    color : '#1875e8'
+    color: '#1875e8'
 }
 
-export default function Item(props) {
+function Item(props) {
     const {
         titulo,
         foto,
@@ -34,6 +39,9 @@ export default function Item(props) {
         carrinho,
         quantidade,
     } = props
+
+    const [modoDeEdicao, setModoDeEdicao] = useState()
+    const [novoTitulo, setNovoTitulo] = useState(titulo)
 
     const dispatch = useDispatch()
     const estaNoCarrinho = useSelector(state => state.carrinho.some(itemNoCarrinho => itemNoCarrinho.id === id))
@@ -46,16 +54,50 @@ export default function Item(props) {
         dispatch(mudarCarrinho(id))
     }
 
+    const componenteModoEdicao = <>
+        {
+            modoDeEdicao
+                ?
+                <AiOutlineCheck
+                    {...iconeProps}
+                    className={styles['item-acao']}
+                    onClick={() => {
+                        setModoDeEdicao(false);
+                        dispatch(mudarItem({
+                            id,
+                            item:{titulo: novoTitulo}
+                        }))
+                    }
+                    }
+                />
+                : <AiFillEdit
+                    {...iconeProps}
+                    className={styles['item-acao']}
+                    onClick={() => setModoDeEdicao(true)}
+                />
+        }
+    </>
+
     return (
         <div className={classNames(styles.item, {
             [styles.itemNoCarrinho]: carrinho
         })}>
+            <AiFillCloseCircle 
+                {...iconeProps} 
+                className={`${styles['item-acao']} ${styles['item-deletar']}`} 
+                onClick={()=>dispatch(deletarItem(id))}
+            />
             <div className={styles['item-imagem']}>
                 <img src={foto} alt={titulo} />
             </div>
             <div className={styles['item-descricao']}>
                 <div className={styles['item-titulo']}>
-                    <h2>{titulo}</h2>
+                    {
+                        modoDeEdicao ?
+                            <Input value={novoTitulo} onChange={evento => setNovoTitulo(evento.target.value)} />
+                            :
+                            <h2>{titulo}</h2>
+                    }
                     <p>{descricao}</p>
                 </div>
             </div>
@@ -74,31 +116,35 @@ export default function Item(props) {
                             (
                                 <div className={styles.quantidade}>
                                     Quantidade:
-                                    <AiFillMinusCircle 
-                                        {...quantidadeProps} 
-                                        onClick={()=>{
-                                            if(quantidade >= 1){
-                                                dispatch(mudarQuantidade({id, quantidade: -1}))
+                                    <AiFillMinusCircle
+                                        {...quantidadeProps}
+                                        onClick={() => {
+                                            if (quantidade >= 1) {
+                                                dispatch(mudarQuantidade({ id, quantidade: -1 }))
                                             }
-                                        }} 
+                                        }}
                                     />
-                                    <span>{String(quantidade || 0).padStart(2,'0')}</span>
-                                    <AiFillPlusCircle  {...quantidadeProps} onClick={()=>dispatch(mudarQuantidade({id, quantidade:  +1}))} />
+                                    <span>{String(quantidade || 0).padStart(2, '0')}</span>
+                                    <AiFillPlusCircle  {...quantidadeProps} onClick={() => dispatch(mudarQuantidade({ id, quantidade: +1 }))} />
                                 </div>
                             )
                             :
                             (
-                                <FaCartPlus 
-                                    {...iconeProps}
-                                    color={estaNoCarrinho ? '#1875e8' : iconeProps.color}
-                                    className={styles['item-acao']}
-                                    onClick={resolverCarrinho}
-                                />
+                                <>
+                                    <FaCartPlus
+                                        {...iconeProps}
+                                        color={estaNoCarrinho ? '#1875e8' : iconeProps.color}
+                                        className={styles['item-acao']}
+                                        onClick={resolverCarrinho}
+                                    />
+                                    {componenteModoEdicao}
+                                </>
                             )
                     }
-
                 </div>
             </div>
         </div>
     )
 }
+
+export default memo(Item)

@@ -4,14 +4,17 @@ import styles from './Anuncie.module.scss';
 import Button from 'components/Button';
 import { useForm } from 'react-hook-form'
 import { cadastrarItem } from 'store/reducers/itens';
+import { useParams } from 'react-router-dom';
+import Input from 'components/Input';
 
 export default function Carrinho() {
   const dispatch = useDispatch();
-
+  const {nomeCategoria=''} = useParams()
+  
   const categorias = useSelector(state=>state.categorias.map(({nome,id})=>({nome,id})))
   const { register, handleSubmit, formState } = useForm({
     defaultValues:{
-      categoria: ''
+      categoria: nomeCategoria
     }
   })
   const { errors } = formState;
@@ -28,27 +31,29 @@ export default function Carrinho() {
       />
       <form className={styles.formulario} onSubmit={handleSubmit(cadastrar)}>
 
-        <input 
-          className={errors.nome ? styles['input-erro'] : ''} 
-          {...register('nome', { required: 'O campo nome é obrigatório' })} 
-          placeholder='Nome do produto' alt='nome do produto' />
-        {errors.nome && <span className={styles['mensagem-erro']}> {errors.nome.message} </span>} 
+        <Input 
+          className={errors.titulo ? styles['input-erro'] : ''} 
+          {...register('titulo', { required: 'O campo titulo é obrigatório' })} 
+          placeholder='titulo do produto' alt='titulo do produto' />
+        {errors.titulo && <span className={styles['mensagem-erro']}> {errors.titulo.message} </span>} 
 
-        <input 
+        <Input 
           className={errors.descricao ? styles['input-erro'] : ''} 
           {...register('descricao', { required: 'O campo descricao é obrigatório' })} 
           placeholder='descricao do produto' alt='descricao do produto' />
         {errors.descricao && <span className={styles['mensagem-erro']}> {errors.descricao.message} </span>}
 
-        <input 
-          className={errors.imagem ? styles['input-erro'] : ''} 
-          {...register('imagem', { required: 'O campo imagem é obrigatório' })} 
-          placeholder='imagem do produto' alt='imagem do produto' />
-        {errors.imagem && <span className={styles['mensagem-erro']}> {errors.imagem.message} </span>}
+        <Input 
+          className={errors.foto ? styles['input-erro'] : ''} 
+          {...register('foto', { required: 'O campo foto é obrigatório' })} 
+          placeholder='foto do produto' alt='foto do produto' />
+        {errors.foto && <span className={styles['mensagem-erro']}> {errors.foto.message} </span>}
 
         <select 
           className={errors.categoria ? styles['input-erro'] : ''} 
-          {...register('categoria',{required:'Catgoria obrigatório'})}>
+          {...register('categoria',{required:'Catgoria obrigatório'})}
+          disabled={nomeCategoria}
+          >
 
           <option value="" disabled>Selecione uma categoria</option>
           {categorias.map(categoria=>(
@@ -59,9 +64,9 @@ export default function Carrinho() {
         </select>
         {errors.categoria && <span className={styles['mensagem-erro']}> {errors.categoria.message} </span>}
 
-        <input type='number'
+        <Input type='number'
           className={errors.preco ? styles['input-erro'] : ''} 
-          {...register('preco', { required: 'O campo preco é obrigatório' })} 
+          {...register('preco', { required: 'O campo preco é obrigatório' , valueAsNumber: true})} 
           placeholder='preco do produto' alt='preco do produto' />
         {errors.preco && <span className={styles['mensagem-erro']}> {errors.preco.message} </span>}
 
