@@ -1,7 +1,8 @@
+import { createStandaloneToast } from '@chakra-ui/toast';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoriasServices from 'services/categoria';
 
-const initialState = [ ];
+const { toast } = createStandaloneToast()
 
 export const buscarCategorias = createAsyncThunk(
   'categorias/buscar',
@@ -10,22 +11,47 @@ export const buscarCategorias = createAsyncThunk(
 
 const categoriasSlice = createSlice({
   name: 'categorias',
-  initialState,
-  reducers: {
-    adicionarCategorias : (state,{payload})=>{
-      state.push(...payload)
-    }
-  },
+  initialState: [], 
   extraReducers: builder=>{
-    builder.addCase(
+    builder 
+    .addCase(
       buscarCategorias.fulfilled,
       (state,{payload})=>{
-        state.push(...payload)
+        toast({
+          title:'Sucesso!',
+          description:'Categorias carregas com sucesso',
+          status:'success',
+          duration:2000,
+          isClosable:true
+        })
+        return payload
       }
     )
+    .addCase(
+      buscarCategorias.pending,
+      (state,{payload})=>{
+        toast({
+          title:'Carregando',
+          description:'Carregando categorias',
+          status:'loading',
+          duration:2000,
+          isClosable:true
+        })
+      }
+    )
+    .addCase(
+      buscarCategorias.rejected,
+      (state,{payload})=>{
+        toast({
+          title:'Erro',
+          description:'Erro na busca de categorias',
+          status:'error',
+          duration:2000,
+          isClosable:true
+        })
+      }
+    ) 
   }
 });
-
-export const { adicionarCategorias } = categoriasSlice.actions
 
 export default categoriasSlice.reducer;

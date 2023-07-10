@@ -15,7 +15,6 @@ export default function Categoria(){
             itens: state.itens.filter(item=>item.categoria===nomeCategoria && item.titulo.match(regexp)),
         }
     })
-
     return (
         <div>
             <Header
