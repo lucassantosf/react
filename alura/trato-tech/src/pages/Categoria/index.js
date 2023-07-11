@@ -1,11 +1,14 @@
 import Header from "components/Header";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from './Categoria.module.scss'
 import Item from "components/Item";
 import Button from "components/Button";
+import { useEffect } from "react";
+import { carregarUmaCategoria } from "store/reducers/categorias";
 
 export default function Categoria(){
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const {nomeCategoria} = useParams()
     const {categoria,itens} = useSelector(state=>{
@@ -15,6 +18,11 @@ export default function Categoria(){
             itens: state.itens.filter(item=>item.categoria===nomeCategoria && item.titulo.match(regexp)),
         }
     })
+
+    useEffect(()=>{
+        dispatch(carregarUmaCategoria(nomeCategoria))
+    },[dispatch, nomeCategoria])
+
     return (
         <div>
             <Header
