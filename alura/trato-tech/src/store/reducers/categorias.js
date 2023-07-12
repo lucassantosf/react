@@ -1,8 +1,5 @@
-import { createStandaloneToast } from '@chakra-ui/toast';
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoriasServices from 'services/categoria';
-
-const { toast } = createStandaloneToast()
 
 export const carregarCategorias = createAction('categorias/carregarCategorias')
 export const carregarUmaCategoria = createAction('categorias/carregarUmaCategoria')
@@ -18,6 +15,9 @@ const categoriasSlice = createSlice({
   reducers:{
     adicionarTodasAsCategorias: (state,{payload})=>{
       return payload
+    },
+    adicionarUmaCategoria: (state,{payload})=>{
+      state.push(payload)
     }
   },
   // extraReducers: builder=>{
@@ -25,6 +25,6 @@ const categoriasSlice = createSlice({
   // }
 });
 
-export const { adicionarTodasAsCategorias } = categoriasSlice.actions
+export const { adicionarTodasAsCategorias, adicionarUmaCategoria } = categoriasSlice.actions
 
 export default categoriasSlice.reducer;

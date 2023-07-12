@@ -35,4 +35,6 @@ export default async function criarTarefa({fork,dispatch,action,busca,textoCarre
             isClosable: true
         })
     }
+
+    return resposta
 }

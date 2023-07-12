@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form'
 import { cadastrarItem } from 'store/reducers/itens';
 import { useParams } from 'react-router-dom';
 import Input from 'components/Input';
+import { useEffect } from 'react';
+import { carregarCategorias, carregarUmaCategoria } from 'store/reducers/categorias';
 
 export default function Carrinho() {
   const dispatch = useDispatch();
@@ -22,6 +24,13 @@ export default function Carrinho() {
   function cadastrar(data){
     dispatch(cadastrarItem(data))
   }
+
+  useEffect(()=>{
+    dispatch(nomeCategoria ? carregarUmaCategoria(nomeCategoria) : carregarCategorias)
+  },[
+    dispatch,
+    nomeCategoria 
+  ])
 
   return (
     <div className={styles.container}>
