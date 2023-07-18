@@ -11,7 +11,7 @@ export default function Carrinho() {
   const {carrinho , total} = useSelector(state => {
     let total = 0
     const regexp = new RegExp(state.busca, 'i')
-    const carrinhoReduce = state.carrinho.reduce((itens, itemNoCarrinho) => {
+    const carrinhoReduce = state.carrinho.data.reduce((itens, itemNoCarrinho) => {
       const item = state.itens.find(item => item.id === itemNoCarrinho.id);
       total += (item.preco * itemNoCarrinho.quantidade)
       if(item.titulo.match(regexp)){
@@ -24,7 +24,7 @@ export default function Carrinho() {
     }, []);
     return {
       carrinho: carrinhoReduce,
-      total 
+      total: state.carrinho.total,
     };
   });
   
