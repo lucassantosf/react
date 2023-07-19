@@ -6,15 +6,13 @@ import Button from 'components/Button';
 import { useNavigate } from 'react-router-dom';
 
 export default function Carrinho() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const {carrinho , total} = useSelector(state => {
-    let total = 0
-    const regexp = new RegExp(state.busca, 'i')
+  const { carrinho, total } = useSelector(state => {
+    const regexp = new RegExp(state.busca, 'i');
     const carrinhoReduce = state.carrinho.data.reduce((itens, itemNoCarrinho) => {
       const item = state.itens.find(item => item.id === itemNoCarrinho.id);
-      total += (item.preco * itemNoCarrinho.quantidade)
-      if(item.titulo.match(regexp)){
+      if (item.titulo.match(regexp)) {
         itens.push({
           ...item,
           quantidade: itemNoCarrinho.quantidade,
@@ -27,7 +25,6 @@ export default function Carrinho() {
       total: state.carrinho.total,
     };
   });
-  
   return (
     <div>
       <Header
@@ -43,10 +40,10 @@ export default function Carrinho() {
           <span>
             Subtotal: <strong> R$ {total.toFixed(2)} </strong>
           </span>
-          <Button onClick={()=>navigate('/pagamento')}>
-            Finalizar Compra
-          </Button>
         </div>
+        <Button onClick={() => navigate('/pagamento')}>
+          Finalizar compra
+        </Button>
       </div>
     </div>
   )
