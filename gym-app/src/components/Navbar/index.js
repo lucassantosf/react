@@ -1,20 +1,15 @@
-import { Nav, NavItem, NavList, StyledLink} from "./styles";
+import { NavbarWrapper, NavBrand, NavItems, NavItem} from "./styles";
 
 const Navbar = () => {
   return (
-    <Nav>
-      <NavList>
-        <NavItem>
-          <StyledLink to="/">Home</StyledLink>
-        </NavItem>
-        <NavItem>
-          <StyledLink to="/about">About</StyledLink>
-        </NavItem>
-        <NavItem>
-          <StyledLink to="/contact">Contact</StyledLink>
-        </NavItem>
-      </NavList>
-    </Nav>
+    <NavbarWrapper>
+      <NavBrand>GymApp</NavBrand>
+      <NavItems>
+        <NavItem>Home</NavItem>
+        <NavItem>About</NavItem>
+        <NavItem>Contact</NavItem>
+      </NavItems>
+    </NavbarWrapper>
   );
 };
 

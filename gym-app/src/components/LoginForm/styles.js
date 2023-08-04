@@ -1,44 +1,34 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const LoginWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: 30px;
   height: 100vh;
 `;
 
-export const LoginFormA = styled.form`
+export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const Title = styled.h2`
-  margin-bottom: 16px;
-  text-align: center;
+export const LoginInput = styled.input`
+  margin-bottom: 10px;
+  padding: 5px;
 `;
 
-export const Input = styled.input`
-  padding: 8px;
-  margin-bottom: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-export const SubmitButton = styled.button`
-  padding: 10px;
-  background-color: #007bff;
+export const LoginButton = styled.button`
+  background-color: #333;
   color: #fff;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 `;
