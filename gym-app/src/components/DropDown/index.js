@@ -1,30 +1,62 @@
 import React, { useState } from 'react';
 import { NavbarWrapper, NavBrand, NavItems, NavItem, DropdownContent, DropdownItem } from './styles';
-import brand from '../../assets/brand.jpg'
 
 const Dropdown = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [dropdownOpenCadastro, setDropdownOpenCadastro] = useState(false);
+    const [dropdownOpenEstoque, setDropdownOpenEstoque] = useState(false);
+    const [dropdownOpenRelatorio, setDropdownOpenRelatorio] = useState(false);
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
+    const toggleDropdownCadastro = () => {
+        setDropdownOpenCadastro(!dropdownOpenCadastro);
+        setDropdownOpenEstoque(false)
+        setDropdownOpenRelatorio(false)
+    };
+
+    const toggleDropdownEstoque = () => {
+        setDropdownOpenEstoque(!dropdownOpenEstoque);
+        setDropdownOpenCadastro(false);
+        setDropdownOpenRelatorio(false);
+    };
+
+    const toggleDropdownRelatorio = () => {
+        setDropdownOpenRelatorio(!dropdownOpenRelatorio);
+        setDropdownOpenCadastro(false);
+        setDropdownOpenEstoque(false)
     };
 
     return (
         <NavbarWrapper>
-            <img src={brand} />
-            <NavBrand>MyApp</NavBrand>
+            <NavBrand>GymApp</NavBrand>
             <NavItems>
-                <NavItem onClick={toggleDropdown}>
+                <NavItem onClick={toggleDropdownCadastro}>
                     Cadastro
-                    <DropdownContent open={dropdownOpen}>
-                        <DropdownItem>Option 1</DropdownItem>
-                        <DropdownItem>Option 2</DropdownItem>
-                        <DropdownItem>Option 3</DropdownItem>
+                    <DropdownContent open={dropdownOpenCadastro}>
+                        <DropdownItem>Alunos</DropdownItem>
+                        <DropdownItem>Planos</DropdownItem>
+                        <DropdownItem>Produtos</DropdownItem>
+                        <DropdownItem>Modalidades</DropdownItem>
+                        <DropdownItem>Turmas</DropdownItem>
+                        <DropdownItem>Fornecedores</DropdownItem>
                     </DropdownContent>
                 </NavItem>
-                <NavItem>Home</NavItem>
-                <NavItem>About</NavItem>
-                <NavItem>Contact</NavItem>
+                <NavItem onClick={toggleDropdownEstoque}>
+                    Estoque
+                    <DropdownContent open={dropdownOpenEstoque}>
+                        <DropdownItem>Lançar Compra</DropdownItem>
+                        <DropdownItem>Balanço</DropdownItem>
+                        <DropdownItem>Cardex</DropdownItem>
+                        <DropdownItem>Disponibilidade</DropdownItem>
+                    </DropdownContent>
+                </NavItem>
+                <NavItem onClick={toggleDropdownRelatorio}>
+                    Relatórios
+                    <DropdownContent open={dropdownOpenRelatorio}>
+                        <DropdownItem>Faturamento</DropdownItem>
+                        <DropdownItem>Receita</DropdownItem>
+                        <DropdownItem>Alunos</DropdownItem>
+                        <DropdownItem>Parcelas</DropdownItem>
+                    </DropdownContent>
+                </NavItem>
             </NavItems>
         </NavbarWrapper>
     );
