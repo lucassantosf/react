@@ -1,15 +1,27 @@
-import { NavbarWrapper, NavBrand, NavItems, NavItem} from "./styles";
-import { useHistory } from 'react-router-dom';
+import { NavbarWrapper, NavBrand, NavItems, NavItem } from "./styles";
+import { useNavigate } from 'react-router-dom';
+import Dropdown from "../../components/DropDown";
 
 const Navbar = () => {
-  const history = useHistory();
+  const navigate = useNavigate()
+  const login = false
   return (
     <NavbarWrapper>
       <NavBrand>GymApp</NavBrand>
+
       <NavItems>
-        <NavItem>Home</NavItem>
-        <NavItem onClick={()=>history.push('/about')}>About</NavItem>
-        <NavItem>Contact</NavItem>
+
+        {
+          login ?
+            <><Dropdown /></>
+            :
+            <>
+              <NavItem onClick={() => navigate('/')}>Home</NavItem>
+              <NavItem onClick={() => navigate('/about')}>About</NavItem>
+              <NavItem onClick={() => navigate('/contact')}>Contact</NavItem>
+            </>
+        }
+
       </NavItems>
     </NavbarWrapper>
   );
