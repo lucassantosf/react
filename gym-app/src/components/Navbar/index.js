@@ -4,15 +4,13 @@ import Dropdown from "../../components/DropDown";
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const login = false
+  const login = true
+  
   return (
     <NavbarWrapper>
-      <NavBrand>GymApp</NavBrand>
-
+      <NavBrand onClick={()=> login ? navigate('/dashboard') : navigate('/')}>GymApp</NavBrand>
       <NavItems>
-
-        {
-          login ?
+        {login ?
             <><Dropdown /></>
             :
             <>
@@ -21,7 +19,6 @@ const Navbar = () => {
               <NavItem onClick={() => navigate('/contact')}>Contact</NavItem>
             </>
         }
-
       </NavItems>
     </NavbarWrapper>
   );

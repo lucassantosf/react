@@ -6,11 +6,6 @@ export const NavbarWrapper = styled.nav`
   padding: 10px;
 `;
 
-export const NavBrand = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-`;
-
 export const NavItems = styled.ul`
   list-style: none;
   display: flex;

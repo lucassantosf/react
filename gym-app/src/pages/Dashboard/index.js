@@ -1,9 +1,14 @@
 import React from "react";
+import { Container , Title } from './styles'
 
 const Dashboard = ()=>{
     return (
         <>
-            <div>Dashboard</div>
+            <Container>
+                <Title>
+                    Olá {`user.name`}, seja bem vindo ao GymApp !
+                </Title>
+            </Container>
         </>
     )
 }

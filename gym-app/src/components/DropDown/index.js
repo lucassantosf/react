@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { NavbarWrapper, NavBrand, NavItems, NavItem, DropdownContent, DropdownItem } from './styles';
+import { NavbarWrapper, NavItems, NavItem, DropdownContent, DropdownItem } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 const Dropdown = () => {
+    const navigate = useNavigate()
     const [dropdownOpenCadastro, setDropdownOpenCadastro] = useState(false);
     const [dropdownOpenEstoque, setDropdownOpenEstoque] = useState(false);
     const [dropdownOpenRelatorio, setDropdownOpenRelatorio] = useState(false);
@@ -26,13 +28,12 @@ const Dropdown = () => {
 
     return (
         <NavbarWrapper>
-            <NavBrand>GymApp</NavBrand>
             <NavItems>
                 <NavItem onClick={toggleDropdownCadastro}>
                     Cadastro
                     <DropdownContent open={dropdownOpenCadastro}>
-                        <DropdownItem>Alunos</DropdownItem>
-                        <DropdownItem>Planos</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('alunos')}>Alunos</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('planos')}>Planos</DropdownItem>
                         <DropdownItem>Produtos</DropdownItem>
                         <DropdownItem>Modalidades</DropdownItem>
                         <DropdownItem>Turmas</DropdownItem>
