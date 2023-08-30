@@ -9,7 +9,7 @@ export const Container = styled.div`
 `
 
 export const Left = styled.div`
-    width: 10%;
+    width: 20%;
     height: 100%;
 `
 
@@ -19,6 +19,6 @@ export const Center = styled.div`
 `
 
 export const Right = styled.div`
-    width: 10%;
+    width: 20%;
     height: 100%;
 `
