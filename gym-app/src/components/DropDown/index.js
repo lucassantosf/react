@@ -34,28 +34,28 @@ const Dropdown = () => {
                     <DropdownContent open={dropdownOpenCadastro}>
                         <DropdownItem onClick={()=>navigate('alunos')}>Alunos</DropdownItem>
                         <DropdownItem onClick={()=>navigate('planos')}>Planos</DropdownItem>
-                        <DropdownItem>Produtos</DropdownItem>
-                        <DropdownItem>Modalidades</DropdownItem>
-                        <DropdownItem>Turmas</DropdownItem>
-                        <DropdownItem>Fornecedores</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('produtos')}>Produtos</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('modalidades')}>Modalidades</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('turmas')}>Turmas</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('fornecedores')}>Fornecedores</DropdownItem>
                     </DropdownContent>
                 </NavItem>
                 <NavItem onClick={toggleDropdownEstoque}>
                     Estoque
                     <DropdownContent open={dropdownOpenEstoque}>
-                        <DropdownItem>Lançar Compra</DropdownItem>
-                        <DropdownItem>Balanço</DropdownItem>
-                        <DropdownItem>Cardex</DropdownItem>
-                        <DropdownItem>Disponibilidade</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('compras')}>Lançar Compra</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('balanco')}>Balanço</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('cardex')}>Cardex</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('disponibilidade')}>Disponibilidade</DropdownItem>
                     </DropdownContent>
                 </NavItem>
                 <NavItem onClick={toggleDropdownRelatorio}>
                     Relatórios
                     <DropdownContent open={dropdownOpenRelatorio}>
-                        <DropdownItem>Faturamento</DropdownItem>
-                        <DropdownItem>Receita</DropdownItem>
-                        <DropdownItem>Alunos</DropdownItem>
-                        <DropdownItem>Parcelas</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('relatorios/faturamento')}>Faturamento</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('relatorios/receita')}>Receita</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('relatorios/alunos')}>Alunos</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('relatorios/parcelas')}>Parcelas</DropdownItem>
                     </DropdownContent>
                 </NavItem>
             </NavItems>
